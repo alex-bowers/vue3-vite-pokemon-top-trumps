@@ -3,6 +3,8 @@
         <h3>{{ playerHeader }}</h3>
         Number of cards left: {{ numberOfCardsLeft }}
 
+        <p v-if="isActivePlayer && !isWinner">It's your turn.</p>
+
         <CurrentCard
             v-if="deck.length"
             :check-cards="checkCards"
@@ -51,8 +53,9 @@ export default defineComponent({
         const playerHeader = computed(() => isWinner.value ? 'You are the winner!' : 'Your cards')
 
         return {
-            isActivePlayer,
             currentCard,
+            isActivePlayer,
+            isWinner,
             numberOfCardsLeft,
             playerHeader
         }
