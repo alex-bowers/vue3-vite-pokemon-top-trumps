@@ -15,10 +15,12 @@ export const useShuffleDeck = (numberOfPlayers) => {
         chunkedDex.push(randomDex.splice(0, chunkSize))
     }
 
-    // Check that the last chunk is the correct size.
+    // Check that the last chunk is the correct size..
     // Check that the total number of chunks equal the number of players.
+    const lastChunk = chunkedDex[chunkedDex.length - 1]
     if (
-        chunkedDex[chunkedDex.length - 1].length !== chunkSize
+        lastChunk
+        && lastChunk.length !== chunkSize
         || chunkedDex.length > numberOfPlayers
     ) {
         chunkedDex.pop()
