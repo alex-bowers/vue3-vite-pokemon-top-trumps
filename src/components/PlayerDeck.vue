@@ -1,6 +1,6 @@
 <template>
     <div class="stats-container">
-        <h3>Your Cards</h3>
+        <h3>{{ playerHeader }}</h3>
         Number of cards left: {{ numberOfCardsLeft }}
 
         <CurrentCard
@@ -47,11 +47,14 @@ export default defineComponent({
         const currentCard: object = computed(() => props.deck[0])
         const isActivePlayer = computed(() => props.activePlayer === props.playerIndex)
         const numberOfCardsLeft = computed(() => props.deck.length)
+        const isWinner = computed(() => numberOfCardsLeft.value === props.totalNumberOfPokemon)
+        const playerHeader = computed(() => isWinner.value ? 'You are the winner!' : 'Your cards')
 
         return {
             isActivePlayer,
             currentCard,
-            numberOfCardsLeft
+            numberOfCardsLeft,
+            playerHeader
         }
     }
 })

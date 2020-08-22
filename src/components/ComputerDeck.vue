@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h3>CPU {{ playerIndex }}<small v-if="isActivePlayer"> - Active Player</small></h3>
+        <h3>CPU {{ playerIndex }}<small v-if="statusMessage">{{ statusMessage }}</small></h3>
         Number of cards left: {{ numberOfCardsLeft }}
     </div>
     <div
-        v-if="isActivePlayer && currentCard"
+        v-if="isActivePlayer && !isWinner && currentCard"
         class="computer-card"
     >
         CPU {{ playerIndex }} has a <strong>{{ currentCard.name }}</strong> and will select <strong>{{ strongestStatOnCurrentCard }}</strong>
@@ -41,7 +41,14 @@ export default defineComponent({
         const currentCardStats = computed(() => currentCard.value.stats)
         const isActivePlayer = computed(() => props.activePlayer === props.playerIndex)
         const numberOfCardsLeft = computed(() => props.deck.length)
-
+        const isWinner = computed(() => numberOfCardsLeft.value === props.totalNumberOfPokemon)
+        const statusMessage = computed(() => {
+            return isWinner.value ?
+                ' is the winner!' :
+                isActivePlayer.value ?
+                    ' - Active Player' :
+                    null
+        })
         const strongestStatOnCurrentCard = computed(() => {
             let bestStat = Object.keys(currentCardStats.value)[0]
             for (const stat in currentCardStats.value) {
@@ -66,9 +73,11 @@ export default defineComponent({
         })
 
         return {
-            isActivePlayer,
             currentCard,
+            isActivePlayer,
+            isWinner,
             numberOfCardsLeft,
+            statusMessage,
             strongestStatOnCurrentCard
         }
     }
