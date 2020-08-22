@@ -69,7 +69,7 @@ export const useCheckCards = (splitDeck) => {
             }
         }
 
-        const largestDuplicateCount = allStatValues.value.reduce(function(n, val) {
+        const largestDuplicateCount = allStatValues.value.reduce((n, val) => {
             return n + (val === largestStatNumber);
         }, 0);
 
