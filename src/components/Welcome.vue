@@ -27,8 +27,8 @@ export default defineComponent({
         }
     },
     setup () {
-        const newNumberOfPlayers = ref(2)
-        const reload = () => window.location.reload()
+        const newNumberOfPlayers = ref<number>(2)
+        const reload = (): void => window.location.reload()
 
         return {
             newNumberOfPlayers,

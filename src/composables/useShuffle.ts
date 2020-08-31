@@ -1,13 +1,16 @@
 import { ref } from 'vue';
 
-import { allKantoPokemon } from '../assets/pokemon';
+import {
+    allKantoPokemon,
+    Pokemon
+} from '../assets/pokemon';
 
-export const useShuffleDeck = (numberOfPlayers) => {
-    const chunkedDex = []
+export const useShuffleDeck = (numberOfPlayers: number) => {
+    const chunkedDex: any[] = []
     const chunkSize: number = Math.floor(allKantoPokemon.length / numberOfPlayers)
-    const randomDex = allKantoPokemon.sort(() => Math.random() - 0.5)
-    const splitDeck = ref([])
-    const totalNumberOfPokemon = ref(0)
+    const randomDex: Pokemon[] = allKantoPokemon.sort(() => Math.random() - 0.5)
+    const splitDeck = ref<Pokemon[]>([])
+    const totalNumberOfPokemon = ref<number>(0)
 
     totalNumberOfPokemon.value = chunkSize * numberOfPlayers
 

@@ -46,11 +46,11 @@ export default defineComponent({
         }
     },
     setup (props) {
-        const currentCard: object = computed(() => props.deck[0])
-        const isActivePlayer = computed(() => props.activePlayer === props.playerIndex)
-        const numberOfCardsLeft = computed(() => props.deck.length)
-        const isWinner = computed(() => numberOfCardsLeft.value === props.totalNumberOfPokemon)
-        const playerHeader = computed(() => isWinner.value ? 'You are the winner!' : 'Your cards')
+        const currentCard = computed(() => props.deck[0])
+        const isActivePlayer = computed<boolean>(() => props.activePlayer === props.playerIndex)
+        const numberOfCardsLeft = computed<number>(() => props.deck.length)
+        const isWinner = computed<boolean>(() => numberOfCardsLeft.value === props.totalNumberOfPokemon)
+        const playerHeader = computed<string>(() => isWinner.value ? 'You are the winner!' : 'Your cards')
 
         return {
             currentCard,

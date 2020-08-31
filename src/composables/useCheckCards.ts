@@ -3,25 +3,27 @@ import {
     ref
 } from 'vue';
 
+import { Pokemon } from '../assets/pokemon';
+
 export const useCheckCards = (splitDeck) => {
-    const activePlayer = ref(0)
-    const cardsInTheMiddle = ref([])
+    const activePlayer = ref<number>(0)
+    const cardsInTheMiddle = ref<Pokemon[]>([])
 
     const currentTopCards = computed(() => {
-        const topCards = []
+        const topCards: Pokemon[] = []
 
         if (splitDeck.value.length) {
             for (let i = 0; i < splitDeck.value.length; i++) {
-                const topOfTheDeck = splitDeck.value[i][0] || null;
+                const topOfTheDeck: Pokemon = splitDeck.value[i][0] || null;
                 topCards.push(topOfTheDeck)
             }
         }
 
         return topCards
     })
-    const numberOfCardsInTheMiddle = computed(() => cardsInTheMiddle.value.length)
+    const numberOfCardsInTheMiddle = computed<number>(() => cardsInTheMiddle.value.length)
 
-    const addCardsToWinner = (winner) => {
+    const addCardsToWinner = (winner: number): void => {
         for (let i = 0; i < currentTopCards.value.length; i++) {
             if (currentTopCards.value[i]) {
                 splitDeck.value[winner].push(currentTopCards.value[i])
@@ -39,27 +41,27 @@ export const useCheckCards = (splitDeck) => {
         }
     }
 
-    const addCardsToTheMiddle = () => {
+    const addCardsToTheMiddle = (): void => {
         for (let i = 0; i < currentTopCards.value.length; i++) {
             cardsInTheMiddle.value.push(currentTopCards.value[i])
         }
     }
 
-    const removePreviousTopCards = () => {
+    const removePreviousTopCards = (): void => {
         for (let i = 0; i < splitDeck.value.length; i++) {
             splitDeck.value[i].shift();
         }
     }
 
-    const checkCards = async (currentPlayer, stat) => {
+    const checkCards = async (currentPlayer: number, stat: string): Promise<void> => {
         const allStatValues = ref([])
-        const largestStatNumber = ref(0)
-        const userWithWinningCard = ref(currentPlayer)
+        const largestStatNumber = ref<number>(0)
+        const userWithWinningCard = ref<number>(currentPlayer)
 
         for (let i = 0; i < currentTopCards.value.length; i++) {
-            const card = currentTopCards.value[i]
+            const card: Pokemon = currentTopCards.value[i]
             if (card) {
-                const cardStat = card.stats[stat]
+                const cardStat: number = card.stats[stat]
 
                 allStatValues.value.push(cardStat)
                 if (cardStat > largestStatNumber.value) {
@@ -69,7 +71,7 @@ export const useCheckCards = (splitDeck) => {
             }
         }
 
-        const largestDuplicateCount = allStatValues.value.reduce((n, val) => {
+        const largestDuplicateCount: number = allStatValues.value.reduce((n, val) => {
             return n + (val === largestStatNumber);
         }, 0);
 

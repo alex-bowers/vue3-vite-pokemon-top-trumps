@@ -34,7 +34,7 @@ export default defineComponent({
         }
     },
     setup (props) {
-        const selectStat = (index) => {
+        const selectStat = (index: number): boolean | void => {
             if (!props.isActivePlayer) return false
 
             props.checkCards(props.playerIndex, index)

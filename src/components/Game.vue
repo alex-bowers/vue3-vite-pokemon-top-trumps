@@ -13,8 +13,7 @@
 <script lang='ts'>
 import {
     defineComponent,
-    ref,
-    Ref
+    ref
 } from 'vue'
 
 import Board from './Board.vue'
@@ -26,9 +25,9 @@ export default defineComponent({
         Welcome
     },
     setup() {
-        const numberOfPlayers: Ref<(number | null)[]> = ref(null)
+        const numberOfPlayers = ref<number | null>(null)
 
-        const updateNumberOfPlayers = (amount) => {
+        const updateNumberOfPlayers = (amount: number): void => {
             numberOfPlayers.value = amount
         }
 

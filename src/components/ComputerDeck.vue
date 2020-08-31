@@ -18,6 +18,8 @@ import {
     watch
 } from 'vue'
 
+import { Pokemon, PokemonStats } from '../assets/pokemon';
+
 export default defineComponent({
     props: {
         activePlayer: {
@@ -38,18 +40,18 @@ export default defineComponent({
     },
     setup (props) {
         const currentCard = computed(() => props.deck[0])
-        const currentCardStats = computed(() => currentCard.value.stats)
-        const isActivePlayer = computed(() => props.activePlayer === props.playerIndex)
-        const numberOfCardsLeft = computed(() => props.deck.length)
-        const isWinner = computed(() => numberOfCardsLeft.value === props.totalNumberOfPokemon)
-        const statusMessage = computed(() => {
+        const currentCardStats = computed<PokemonStats>(() => currentCard.value.stats)
+        const isActivePlayer = computed<boolean>(() => props.activePlayer === props.playerIndex)
+        const numberOfCardsLeft = computed<number>(() => props.deck.length)
+        const isWinner = computed<boolean>(() => numberOfCardsLeft.value === props.totalNumberOfPokemon)
+        const statusMessage = computed<string>(() => {
             return isWinner.value ?
                 ' is the winner!' :
                 isActivePlayer.value ?
                     ' - Active Player' :
                     null
         })
-        const strongestStatOnCurrentCard = computed(() => {
+        const strongestStatOnCurrentCard = computed<string>(() => {
             let bestStat = Object.keys(currentCardStats.value)[0]
             for (const stat in currentCardStats.value) {
                 if (currentCardStats.value[stat] > currentCardStats.value[bestStat]) {
