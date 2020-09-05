@@ -6,6 +6,7 @@
     />
     <Board
         v-if="numberOfPlayers"
+        :chosen-gym-type="chosenGymType"
         :number-of-players="numberOfPlayers"
     />
 </template>
@@ -25,13 +26,16 @@ export default defineComponent({
         Welcome
     },
     setup() {
+        const chosenGymType = ref<string | null>(null)
         const numberOfPlayers = ref<number | null>(null)
 
-        const updateNumberOfPlayers = (amount: number): void => {
+        const updateNumberOfPlayers = (amount: number, type: string): void => {
+            chosenGymType.value = type
             numberOfPlayers.value = amount
         }
 
         return {
+            chosenGymType,
             numberOfPlayers,
             updateNumberOfPlayers
         }

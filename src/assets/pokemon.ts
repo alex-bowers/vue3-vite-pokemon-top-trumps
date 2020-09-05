@@ -1827,3 +1827,27 @@ export const allKantoPokemon: Pokemon[] = [
         }
     }
 ]
+
+export interface PokemonTypes {
+    [key: string]: string
+}
+
+export const allKantoPokemonTypes: PokemonTypes = {
+    "BUG": "Bug",
+    "DRA": "Dragon",
+    "ELE": "Electric",
+    "FAI": "Fairy",
+    "FIG": "Fighting",
+    "FIR": "Fire",
+    "FLY": "Flying",
+    "GHO": "Ghost",
+    "GRA": "Grass",
+    "GRO": "Ground",
+    "ICE": "Ice",
+    "NOR": "Normal",
+    "POI": "Poison",
+    "PSY": "Psychic",
+    "ROC": "Rock",
+    "STE": "Steel",
+    "WAT": "Water"
+}
