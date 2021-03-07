@@ -19,7 +19,7 @@ import {
     watch
 } from 'vue'
 
-import { Pokemon, PokemonStats } from '../types';
+import { Pokemon, PokemonStats } from '../types'
 
 export default defineComponent({
     props: {

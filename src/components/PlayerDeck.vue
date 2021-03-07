@@ -22,7 +22,7 @@ import {
     PropType
 } from 'vue'
 
-import { Pokemon } from "../types";
+import { Pokemon } from "../types"
 
 import CurrentCard from "./CurrentCard.vue"
 

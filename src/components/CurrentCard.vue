@@ -18,7 +18,7 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 
-import { Pokemon } from "../types";
+import { Pokemon } from "../types"
 
 export default defineComponent({
     props: {

@@ -1,9 +1,9 @@
 import {
     computed,
     ref
-} from 'vue';
+} from 'vue'
 
-import { Pokemon } from '../assets/pokemon';
+import { Pokemon } from '../assets/pokemon'
 
 export const useCheckCards = (splitDeck) => {
     const activePlayer = ref<number>(0)
@@ -14,7 +14,7 @@ export const useCheckCards = (splitDeck) => {
 
         if (splitDeck.value.length) {
             for (let i = 0; i < splitDeck.value.length; i++) {
-                const topOfTheDeck: Pokemon = splitDeck.value[i][0] || null;
+                const topOfTheDeck: Pokemon = splitDeck.value[i][0] || null
                 topCards.push(topOfTheDeck)
             }
         }
@@ -49,7 +49,7 @@ export const useCheckCards = (splitDeck) => {
 
     const removePreviousTopCards = (): void => {
         for (let i = 0; i < splitDeck.value.length; i++) {
-            splitDeck.value[i].shift();
+            splitDeck.value[i].shift()
         }
     }
 
@@ -66,14 +66,14 @@ export const useCheckCards = (splitDeck) => {
                 allStatValues.value.push(cardStat)
                 if (cardStat > largestStatNumber.value) {
                     largestStatNumber.value = cardStat
-                    userWithWinningCard.value = i;
+                    userWithWinningCard.value = i
                 }
             }
         }
 
         const largestDuplicateCount: number = allStatValues.value.reduce((n, val) => {
-            return n + (val === largestStatNumber);
-        }, 0);
+            return n + (val === largestStatNumber)
+        }, 0)
 
         if (largestDuplicateCount === 0) {
             await addCardsToWinner(userWithWinningCard.value)

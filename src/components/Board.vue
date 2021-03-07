@@ -28,12 +28,12 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent } from 'vue'
 
-import ComputerDeck from "./ComputerDeck.vue";
-import PlayerDeck from "./PlayerDeck.vue";
-import { useShuffleDeck } from "../composables/useShuffle";
-import { useCheckCards } from "../composables/useCheckCards";
+import ComputerDeck from "./ComputerDeck.vue"
+import PlayerDeck from "./PlayerDeck.vue"
+import { useShuffleDeck } from "../composables/useShuffle"
+import { useCheckCards } from "../composables/useCheckCards"
 
 export default defineComponent({
     components: {
@@ -47,7 +47,7 @@ export default defineComponent({
     },
     setup (props) {
         const { splitDeck, totalNumberOfPokemon } = useShuffleDeck(props.numberOfPlayers)
-        const { activePlayer, checkCards, numberOfCardsInTheMiddle } = useCheckCards(splitDeck);
+        const { activePlayer, checkCards, numberOfCardsInTheMiddle } = useCheckCards(splitDeck)
 
         return {
             activePlayer,

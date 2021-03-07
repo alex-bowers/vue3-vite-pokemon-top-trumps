@@ -1,9 +1,9 @@
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 import {
     allKantoPokemon,
     Pokemon
-} from '../assets/pokemon';
+} from '../assets/pokemon'
 
 export const useShuffleDeck = (numberOfPlayers: number) => {
     const chunkedDex: any[] = []
