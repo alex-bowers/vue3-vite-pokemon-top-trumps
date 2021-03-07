@@ -2,7 +2,7 @@
     <Game />
 </template>
 
-<script>
+<script lang="ts">
 import { defineComponent } from 'vue'
 import Game from './components/Game.vue'
 
