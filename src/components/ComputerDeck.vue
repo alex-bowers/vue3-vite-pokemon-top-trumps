@@ -15,6 +15,7 @@
 import {
     computed,
     defineComponent,
+    nextTick,
     PropType,
     watch
 } from 'vue'
@@ -40,9 +41,15 @@ export default defineComponent({
         }
     },
     setup (props) {
-        const currentCard = computed<Pokemon>(() => props.deck[0])
-        const currentCardStats = computed<PokemonStats>(() => currentCard.value.stats)
         const isActivePlayer = computed<boolean>(() => props.activePlayer === props.playerIndex)
+        const currentCard = computed<Pokemon>(() => props.deck[0])
+        const currentCardStats = computed<PokemonStats>(() => {
+            if (currentCard && currentCard.value) {
+                return currentCard.value.stats
+            }
+
+            return null
+        })
         const numberOfCardsLeft = computed<number>(() => props.deck.length)
         const isWinner = computed<boolean>(() => numberOfCardsLeft.value === props.totalNumberOfPokemon)
         const statusMessage = computed<string>(() => {
@@ -53,26 +60,32 @@ export default defineComponent({
                     null
         })
         const strongestStatOnCurrentCard = computed<string>(() => {
-            let bestStat = Object.keys(currentCardStats.value)[0]
-            for (const stat in currentCardStats.value) {
-                if (currentCardStats.value[stat] > currentCardStats.value[bestStat]) {
-                    bestStat = stat
+            if (currentCard && currentCard.value) {
+                let bestStat = Object.keys(currentCardStats.value)[0]
+                for (const stat in currentCardStats.value) {
+                    if (currentCardStats.value[stat] > currentCardStats.value[bestStat]) {
+                        bestStat = stat
+                    }
                 }
+
+                return bestStat
             }
 
-            return bestStat
+            return null
         })
 
         watch(currentCard, (value) => {
-            if (
-                isActivePlayer.value
-                && value
-                && (props.totalNumberOfPokemon !== numberOfCardsLeft.value)
-            ) {
-                setTimeout(() => {
-                    props.checkCards(props.playerIndex, strongestStatOnCurrentCard.value)
-                }, 3000)
-            }
+            nextTick(() => {
+                if (
+                    isActivePlayer.value
+                    && value
+                    && (props.totalNumberOfPokemon !== numberOfCardsLeft.value)
+                ) {
+                    setTimeout(() => {
+                        props.checkCards(props.playerIndex, strongestStatOnCurrentCard.value)
+                    }, 3000)
+                }
+            })
         })
 
         return {
