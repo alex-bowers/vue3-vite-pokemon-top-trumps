@@ -5,7 +5,7 @@ import {
 
 import { Pokemon } from '../types'
 
-export const useCheckCards = (splitDeck: Pokemon[][]) => {
+export const useCheckCards = (splitDeck) => {
     const activePlayer = ref<number>(0)
     const cardsInTheMiddle = ref<Pokemon[]>([])
 
