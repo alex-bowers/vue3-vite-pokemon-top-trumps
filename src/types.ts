@@ -5,10 +5,10 @@ export interface Pokemon {
 }
 
 export interface PokemonStats {
-    hp: number,
-    attack: number,
-    defense: number,
+    "hp": number,
+    "attack": number,
+    "defense": number,
     "sp-attack": number,
     "sp-defense": number,
-    speed: number
+    "speed": number
 }

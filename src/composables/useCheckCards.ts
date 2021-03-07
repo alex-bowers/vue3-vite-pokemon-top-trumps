@@ -3,13 +3,13 @@ import {
     ref
 } from 'vue'
 
-import { Pokemon } from '../assets/pokemon'
+import { Pokemon } from '../types'
 
-export const useCheckCards = (splitDeck) => {
+export const useCheckCards = (splitDeck: Pokemon[][]) => {
     const activePlayer = ref<number>(0)
     const cardsInTheMiddle = ref<Pokemon[]>([])
 
-    const currentTopCards = computed(() => {
+    const currentTopCards = computed<Pokemon[]>(() => {
         const topCards: Pokemon[] = []
 
         if (splitDeck.value.length) {
@@ -54,7 +54,7 @@ export const useCheckCards = (splitDeck) => {
     }
 
     const checkCards = async (currentPlayer: number, stat: string): Promise<void> => {
-        const allStatValues = ref([])
+        const allStatValues = ref<number[]>([])
         const largestStatNumber = ref<number>(0)
         const userWithWinningCard = ref<number>(currentPlayer)
 
@@ -72,7 +72,11 @@ export const useCheckCards = (splitDeck) => {
         }
 
         const largestDuplicateCount: number = allStatValues.value.reduce((n, val) => {
-            return n + (val === largestStatNumber)
+            if (val === largestStatNumber.value) {
+                return n
+            }
+
+            return 0
         }, 0)
 
         if (largestDuplicateCount === 0) {
