@@ -28,14 +28,10 @@
 </template>
 
 <script lang="ts">
-import {
-    defineComponent,
-    ref
-} from 'vue';
+import { defineComponent } from 'vue';
 
 import ComputerDeck from "./ComputerDeck.vue";
 import PlayerDeck from "./PlayerDeck.vue";
-import { allKantoPokemon } from '../assets/pokemon';
 import { useShuffleDeck } from "../composables/useShuffle";
 import { useCheckCards } from "../composables/useCheckCards";
 

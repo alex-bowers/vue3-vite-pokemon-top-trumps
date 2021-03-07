@@ -19,8 +19,10 @@
 import {
     computed,
     defineComponent,
-    reactive
+    PropType
 } from 'vue'
+
+import { Pokemon } from "../types";
 
 import CurrentCard from "./CurrentCard.vue"
 
@@ -36,7 +38,7 @@ export default defineComponent({
             type: Function
         },
         deck: {
-            type: Array
+            type: Array as PropType<Pokemon[]>
         },
         playerIndex: {
             type: Number
@@ -46,7 +48,7 @@ export default defineComponent({
         }
     },
     setup (props) {
-        const currentCard = computed(() => props.deck[0])
+        const currentCard = computed<Pokemon>(() => props.deck[0])
         const isActivePlayer = computed<boolean>(() => props.activePlayer === props.playerIndex)
         const numberOfCardsLeft = computed<number>(() => props.deck.length)
         const isWinner = computed<boolean>(() => numberOfCardsLeft.value === props.totalNumberOfPokemon)

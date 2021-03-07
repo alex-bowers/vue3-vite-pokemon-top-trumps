@@ -15,10 +15,11 @@
 import {
     computed,
     defineComponent,
+    PropType,
     watch
 } from 'vue'
 
-import { Pokemon, PokemonStats } from '../assets/pokemon';
+import { Pokemon, PokemonStats } from '../types';
 
 export default defineComponent({
     props: {
@@ -29,7 +30,7 @@ export default defineComponent({
             type: Function
         },
         deck: {
-            type: Array
+            type: Array as PropType<Pokemon[]>
         },
         playerIndex: {
             type: Number
@@ -39,7 +40,7 @@ export default defineComponent({
         }
     },
     setup (props) {
-        const currentCard = computed(() => props.deck[0])
+        const currentCard = computed<Pokemon>(() => props.deck[0])
         const currentCardStats = computed<PokemonStats>(() => currentCard.value.stats)
         const isActivePlayer = computed<boolean>(() => props.activePlayer === props.playerIndex)
         const numberOfCardsLeft = computed<number>(() => props.deck.length)
@@ -62,7 +63,7 @@ export default defineComponent({
             return bestStat
         })
 
-        watch(currentCard, (value, oldValue) => {
+        watch(currentCard, (value) => {
             if (
                 isActivePlayer.value
                 && value

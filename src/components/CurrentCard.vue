@@ -3,20 +3,22 @@
         <h4 class="pokemon-card--title">{{ pokemon.name }}</h4>
 
         <div
-            v-for="(stat, index) in pokemon.stats"
-            :key="index"
-            @click="selectStat(index)"
+            v-for="(stat, moveType) in pokemon.stats"
+            :key="moveType"
             :class="{ 'pokemon-card--is-selectable': isActivePlayer }"
+            @click="selectStat(moveType)"
             class="pokemon-card--stats-row"
         >
-            <span>{{ index }}</span>
+            <span>{{ moveType }}</span>
             <span>{{ stat }}</span>
         </div>
     </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, PropType } from 'vue'
+
+import { Pokemon } from "../types";
 
 export default defineComponent({
     props: {
@@ -30,7 +32,7 @@ export default defineComponent({
             type: Number
         },
         pokemon: {
-            type: Object
+            type: Object as PropType<Pokemon>
         }
     },
     setup (props) {
